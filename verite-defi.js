@@ -1,0 +1,118 @@
+// Mode « Vérité ou défi » : une question difficile, et si on se trompe ou si on ne répond pas, c'est le défi.
+// La carte est lue à voix haute par l'autre joueur : « tu » = le joueur dont c'est le tour, « je/moi » = celui qui lit.
+
+// Questions où il faut trouver la bonne réponse sur l'autre.
+const TRUTH_GUESS_QUESTIONS = [
+  "À ton avis, quel est mon plat préféré ?",
+  "À ton avis, quelle est ma pointure ?",
+  "À ton avis, quel est le plat que je déteste le plus ?",
+  "À ton avis, quelle est ma plus grande peur ?",
+  "À ton avis, quel est le prénom de mon ami ou de mon amie d'enfance le plus proche ?",
+  "À ton avis, quelle est la chanson que j'écoute le plus en ce moment ?",
+  "À ton avis, quel métier rêvais-je de faire quand j'étais petit(e) ?",
+  "À ton avis, quelle est la chose qui m'agace le plus au quotidien ?",
+  "À ton avis, quel est mon film préféré de tous les temps ?",
+  "À ton avis, quelle boisson est-ce que je commande le plus souvent au restaurant ?",
+  "À ton avis, de quoi suis-je le plus fier ou fière dans ma vie ?",
+  "À ton avis, quel est mon plus beau souvenir avec toi ?",
+  "À ton avis, quel pays est-ce que je rêve le plus de visiter ?",
+  "À ton avis, quel dessert pourrais-je manger tous les jours ?",
+  "À ton avis, quelle est ma couleur préférée ?",
+  "À ton avis, de quelle personne de ma famille suis-je le plus proche ?",
+  "À ton avis, quel cadeau de ta part m'a le plus touché(e) ?",
+  "À ton avis, à quelle heure est-ce que je préfère me lever un jour de repos ?",
+  "À ton avis, quelle tâche ménagère est-ce que je déteste le plus ?",
+  "À ton avis, quel surnom est-ce que je préfère quand tu m'appelles ?",
+  "Sans me regarder : de quelle couleur sont mes yeux, exactement ?",
+  "Quelle tenue portais-je lors de notre premier rendez-vous ?",
+  "Quelle est la date exacte de notre première rencontre ?",
+  "Quelle a été la première chose que je t'ai dite ?",
+  "Sans regarder ton téléphone : quel est le dernier message que je t'ai envoyé ?",
+  "À ton avis, qu'est-ce que je commande à coup sûr dans un fast-food ?",
+  "À ton avis, quelle est la phrase que je répète tout le temps ?",
+  "À ton avis, qu'est-ce qui me fait pleurer à coup sûr ?",
+  "À ton avis, quelle est mon odeur préférée ?",
+  "À ton avis, quelle application est-ce que j'utilise le plus sur mon téléphone ?"
+];
+
+// Questions difficiles parce qu'il faut oser répondre honnêtement.
+const TRUTH_HONEST_QUESTIONS = [
+  "Quel petit mensonge m'as-tu déjà dit pour éviter une dispute ?",
+  "Qu'est-ce que tu n'as jamais osé me reprocher ?",
+  "Quelle habitude de ma part te dérange vraiment ?",
+  "Quel est ton plus grand regret dans notre relation ?",
+  "Quelle est la dernière fois où tu t'es senti(e) jaloux ou jalouse ?",
+  "De quoi as-tu le plus honte dans ta vie ?",
+  "Quel secret as-tu gardé le plus longtemps ?",
+  "Si tu pouvais changer une chose chez moi, laquelle serait-ce ?",
+  "Quelle est la chose la plus méchante que tu aies pensée de moi ?",
+  "Quand as-tu douté de nous pour la dernière fois ?",
+  "Qu'est-ce que tu fais en cachette et que je ne sais pas ?",
+  "Qu'est-ce qui te fait le plus peur dans notre avenir ?",
+  "Quel membre de mon entourage as-tu le plus de mal à supporter ?",
+  "Quelle dispute entre nous penses-tu avoir gagnée alors que tu avais tort ?",
+  "Qu'as-tu déjà fait semblant d'aimer pour me faire plaisir ?",
+  "À quel moment t'ai-je le plus déçu(e) ?",
+  "À quel moment penses-tu m'avoir le plus déçu(e) ?",
+  "Qu'est-ce que tu aimerais que je fasse plus souvent, sans jamais me l'avoir demandé ?",
+  "Quel cadeau de ma part n'as-tu pas vraiment aimé ?",
+  "Quelle est la chose que tu regrettes le plus de m'avoir dite ?",
+  "Qu'est-ce qui te manque de ta vie d'avant notre rencontre ?",
+  "Quelle est ta plus grande insécurité ?",
+  "Quelle excuse inventes-tu le plus souvent pour éviter de faire quelque chose ?",
+  "Qu'as-tu caché à tes parents et que tu leur caches encore ?",
+  "Quel est ton plus gros défaut, honnêtement ?",
+  "Qu'est-ce que tu n'as jamais réussi à me pardonner complètement ?",
+  "Que penses-tu vraiment de ma cuisine ?",
+  "Quelle est la pire chose que tu aies faite à quelqu'un ?",
+  "Quel compliment m'as-tu déjà fait sans vraiment le penser ?",
+  "As-tu déjà regardé dans mon téléphone ou dans mes affaires ?"
+];
+
+// Défis à faire tout de suite, ou à remettre à plus tard si on préfère.
+const TRUTH_DARES_NOW = [
+  "Regarde-moi dans les yeux pendant une minute sans rire.",
+  "Fais-moi un massage des épaules pendant deux minutes.",
+  "Dis-moi trois choses que tu aimes chez moi, en moins de dix secondes.",
+  "Imite-moi pendant trente secondes, avec mes expressions préférées.",
+  "Chante-moi le refrain d'une chanson d'amour, même faux.",
+  "Invente-moi un nouveau surnom et utilise-le jusqu'à la fin de la partie.",
+  "Danse un slow avec moi pendant une minute, même sans musique.",
+  "Écris-moi un petit mot doux et lis-le-moi à voix haute.",
+  "Fais-moi rire en moins d'une minute, par n'importe quel moyen.",
+  "Va me préparer une boisson ou un petit en-cas, tout de suite.",
+  "Fais-moi un compliment sur quelque chose dont tu ne m'as encore jamais parlé.",
+  "Raconte notre rencontre comme un conte de fées, en une minute.",
+  "Déclare-moi ton amour comme dans un film très dramatique.",
+  "Prends une photo de nous deux avec la grimace la plus ridicule possible.",
+  "Fais dix pompes ou dix squats pendant que je t'encourage.",
+  "Dessine mon portrait en une minute, les yeux fermés.",
+  "Envoie-moi un message adorable, comme si on venait de se rencontrer.",
+  "Mime le moment où tu as compris que tu tenais à moi.",
+  "Donne-moi un bisou sur le front, un sur la main et un sur la joue.",
+  "Fais-moi un câlin de trente secondes sans rien dire.",
+  "Rejoue notre première conversation le mieux possible.",
+  "Parle avec l'accent de ton choix pendant les deux prochaines cartes.",
+  "Invite-moi à un rendez-vous avec la phrase la plus ringarde possible.",
+  "Laisse-moi choisir une musique, et danse dessus pendant trente secondes.",
+  "Cite cinq choses pour lesquelles tu as envie de me dire merci."
+];
+
+// Défis qui ne peuvent se faire que plus tard : ils s'ajoutent à la liste de fin de partie.
+const TRUTH_DARES_LATER = [
+  "Prépare-moi un petit-déjeuner surprise cette semaine.",
+  "Organise notre prochaine soirée de A à Z, sans me dire ce qui est prévu.",
+  "Cache un petit mot doux que je trouverai dans les prochains jours.",
+  "Cuisine-moi mon plat préféré d'ici la fin du mois.",
+  "Occupe-toi pendant une semaine d'une corvée que je déteste.",
+  "Prépare-moi une playlist de dix chansons qui te font penser à moi.",
+  "Emmène-moi ce mois-ci dans un endroit où on n'est jamais allés.",
+  "Écris-moi une vraie lettre à la main et donne-la-moi la semaine prochaine.",
+  "Organise une soirée sans téléphone pour nous deux cette semaine.",
+  "Crée un petit album de nos plus belles photos.",
+  "Offre-moi un massage de vingt minutes ce soir ou demain soir.",
+  "Réserve une heure rien que pour nous deux cette semaine.",
+  "Apprends une recette que je n'ai jamais goûtée et prépare-la pour moi.",
+  "Envoie-moi un message doux à un moment inattendu de la semaine.",
+  "Choisis une photo de nous et fais-la imprimer pour la maison."
+];

@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#17132d">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Nous Deux">
+  <title>NOUS DEUX — Le jeu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <header class="topbar">
+    <a class="brand" href="#" id="brandHome"><span class="brand-mark">♥</span> NOUS <b>DEUX</b></a>
+    <div class="top-actions"><span class="live-dot"></span><span>JEU LOCAL · 100% HORS LIGNE</span><button class="icon-btn" id="soundBtn" title="Activer / couper les sons">♫</button></div>
+  </header>
+
+  <main>
+    <section id="home" class="screen active">
+      <div class="hero">
+        <div class="eyebrow"><span>✦</span> LE JEU QUI VOUS RAPPROCHE <span>✦</span></div>
+        <h1>À quel point<br><span class="nowrap">vous connaissez-vous</span> <em>vraiment&nbsp;?</em></h1>
+        <p class="hero-copy">Des questions, des défis, des fous rires et quelques surprises. <br>Deux joueurs, un écran, plein de choses à découvrir.</p>
+        <div class="name-panel">
+          <div class="name-field"><label for="name1">JOUEUR 1</label><input id="name1" maxlength="18" value="Joueur 1" autocomplete="off" autocapitalize="words" enterkeyhint="next"></div>
+          <div class="heart-divider">♥</div>
+          <div class="name-field"><label for="name2">JOUEUR 2</label><input id="name2" maxlength="18" value="Joueur 2" autocomplete="off" autocapitalize="words" enterkeyhint="done"></div>
+        </div>
+        <button class="primary-btn" id="startBtn">C'EST PARTI <span>→</span></button>
+        <div class="micro-note">Aucune inscription · Aucune sauvegarde · Juste vous deux</div>
+      </div>
+      <div class="home-bottom">
+        <div class="stat-chip"><b>500</b><span>QUESTIONS & IDÉES</span></div>
+        <div class="stat-chip"><b>10</b><span>UNIVERS À EXPLORER</span></div>
+        <div class="stat-chip"><b>∞</b><span>FAÇONS DE JOUER</span></div>
+      </div>
+    </section>
+
+    <section id="menu" class="screen">
+      <div class="section-head"><div><div class="eyebrow">CHOISISSEZ VOTRE AVENTURE</div><h2>On joue à quoi <em>maintenant&nbsp;?</em></h2></div><button class="text-btn" id="backHome">← Accueil</button></div>
+      <div class="player-strip"><span class="avatar">♥</span><span id="playerNames"></span><span class="strip-sep">·</span><span>À vous de jouer !</span></div>
+      <div class="mode-grid" id="modeGrid"></div>
+      <div class="secret-entry"><div><b>Vous avez un code secret ?</b><small>Certains modes bonus se cachent ici…</small></div><div class="secret-form"><input id="secretCode" placeholder="ENTRER UN CODE" maxlength="24" autocomplete="off" autocapitalize="characters" autocorrect="off" spellcheck="false" enterkeyhint="go"><button id="codeBtn">OK</button></div></div>
+      <div id="secretMessage" class="secret-message"></div>
+    </section>
+
+    <section id="play" class="screen">
+      <div class="play-head"><button class="text-btn" id="quitBtn">← Quitter la manche</button><div class="round-label" id="roundLabel">MANCHE 1</div><div class="scoreboard" id="scoreboard"></div></div>
+      <div class="progress-track"><div id="progressBar"></div></div>
+      <div class="play-layout">
+        <aside class="play-aside"><div class="level-pill" id="levelPill">DÉCOUVERTE</div><div class="category-title" id="categoryTitle">QUIZ</div><p id="categoryDesc"></p><div class="turn-indicator"><span class="turn-dot"></span><div><small>AU TOUR DE</small><b id="currentPlayer"></b></div></div></aside>
+        <div class="question-area">
+          <div class="question-card" id="questionCard">
+            <div class="card-top"><span id="cardType">QUESTION</span><span class="card-spark">✦ ✦ ✦</span></div>
+            <div class="question-number" id="questionNumber">01 / 10</div>
+            <h2 id="questionText">Prêts à vous découvrir ?</h2>
+            <p id="questionHint">Prenez le temps de répondre, l'important est de partager.</p>
+            <div id="answerArea" class="answer-area"></div>
+            <div class="card-actions"><button class="skip-btn" id="skipBtn">Passer ↗</button><button class="skip-btn" id="passBtn" style="display:none">Passer ce défi ↗</button><button class="primary-btn" id="validateBtn">Valider <span>→</span></button></div>
+          </div>
+          <div class="mini-tip" id="miniTip">Petit conseil : écoutez la réponse jusqu'au bout, sans vous couper.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="result" class="screen">
+      <div class="result-wrap"><div class="result-icon">✦</div><div class="eyebrow">MANCHE TERMINÉE</div><h2>Bien joué, <em>vous deux !</em></h2><p id="resultText">Vous avez partagé un joli moment.</p><div class="result-scores" id="resultScores"></div><div class="later-dares" id="laterDares" style="display:none"></div><div class="result-actions"><button class="primary-btn" id="againBtn">Rejouer ce mode <span>↻</span></button><button class="secondary-btn" id="menuBtn">Retour aux modes</button></div><div class="micro-note">Les points sont remis à zéro quand vous quittez le jeu.</div></div>
+    </section>
+  </main>
+  <footer><span>FAIT POUR JOUER À DEUX</span><span>♥</span><span>RIEN À PROUVER, TOUT À DÉCOUVRIR</span></footer>
+  <div id="toast" class="toast" role="status"></div>
+  <script src="js/questions.js"></script>
+  <script src="js/verite-defi.js"></script>
+  <script src="js/mini-jeux.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
